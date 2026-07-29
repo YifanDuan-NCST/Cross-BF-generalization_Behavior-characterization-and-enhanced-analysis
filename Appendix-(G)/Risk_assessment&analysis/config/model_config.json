@@ -1,0 +1,56 @@
+{
+  "risk_estimator": {
+    "lstm": {
+      "input_size": 16,
+      "hidden_size": 128,
+      "num_layers": 2,
+      "dropout": 0.3,
+      "bidirectional": false,
+      "batch_first": true
+    },
+    "mlp": {
+      "layers": [512, 256, 128, 64],
+      "dropout": 0.3,
+      "activation": "relu",
+      "use_batch_norm": true
+    },
+    "output": {
+      "use_temperature_scaling": true,
+      "risk_thresholds": {
+        "low": 0.3,
+        "medium": 0.7,
+        "high": 1.0
+      }
+    }
+  },
+  "enhanced_interpreter": {
+    "shap": {
+      "approximation": "kernel_shap",
+      "n_samples": 100,
+      "background_size": 50
+    },
+    "label_shap": {
+      "num_classes": 3,
+      "update_alpha": 0.1,
+      "contribution_threshold": 0.05
+    }
+  },
+  "training": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "num_epochs": 50,
+    "weight_decay": 1e-5,
+    "early_stopping_patience": 10,
+    "weighted_loss": true,
+    "validation_split": 0.2,
+    "seed": 42
+  },
+  "data": {
+    "sequence_length": 60,
+    "num_sensors": 12,
+    "num_fused_features": 3,
+    "num_samples": 5000,
+    "num_furnaces": 3,
+    "risk_classes": ["low", "medium", "high"]
+  }
+}
